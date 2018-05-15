@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Keno Admin</title>
+<script src="./jquery-1.10.1.min.js"></script>
+<script src="./md5.js"></script>
+
+<script type="text/javascript" >
+$(document).ready(function () {
+    var login = function () {
+        var username = $('#username').val()
+        var password = $('#password').val()
+        var hash = hex_md5(password);
+        var req = {
+            username: username,
+            password: hash
+        }
+        console.log("login request data: ", req)
+        let ret = $.post("/admin/login", req, function(rsp) {
+        	console.log("login response data: ", rsp)
+            if (ret.status == 200) {
+                if (!!rsp.error) {
+                    alert(rsp.error)
+                } else {
+                    window.location.href = "/admin/tool.html?hash="+hash
+                }
+            } else {
+               alert(`login failed, status: ${ret.status}`)
+            }
+        })
+    }
+
+    $('#login').click(function () {
+        login();
+    });
+});
+</script>
+</head>
+
+<body>
+
+<form method="POST">
+    <p>账号<input id="username" type="text" name="id"/></p>
+    <p>密码<input id="password" type="text" name="password"/></p>
+    <p>
+    	<button id="login" type="button" value="登陆">登陆</button>
+    </p>
+</form>
+ 
+</body>
+
+</html>

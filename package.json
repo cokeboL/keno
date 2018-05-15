@@ -1,0 +1,26 @@
+{
+  "name": "keno",
+  "version": "1.0.0",
+  "description": "config tool:\r {\r \tbegintime\r \tendtime\r \tspantime\r \tcode\r }\r 生成局号",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/localgame/keno.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/localgame/keno/issues"
+  },
+  "homepage": "https://github.com/localgame/keno#readme",
+  "dependencies": {
+    "connect-multiparty": "^2.1.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "log4js": "^2.5.3",
+    "mysql": "^2.15.0"
+  }
+}
