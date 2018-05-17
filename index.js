@@ -1,18 +1,21 @@
 const log = require('log4js').getLogger()
 const express = require('express')
 const db = require('./app/db')
+const calc = require('./app/calc')
 const config = require('./config')
 const router = require('./app/router')
 const bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
-
-
 
 log.level = 'debug'
 
 db.initMysql(config.mysql)
 
 let app = express()
+if(config.enablecalc) {
+	app.use(calc())	
+}
+app.use(require('express-promise')())
 app.use(express.static('public'))
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({    

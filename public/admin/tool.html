@@ -6,7 +6,7 @@
 
 <script type="text/javascript" >
 $(document).ready(function () {
-    var adcode = function () {
+    var addIssues = function () {
         var code = $('#code').val()
         var begintime = $('#begintime').val()
         var endtime = $('#endtime').val()
@@ -22,8 +22,8 @@ $(document).ready(function () {
             timeoffset: timeoffset,
             hash: hash,
         }
-        console.log("addCode request data: ", req)
-        let ret = $.post("/admin/addCode", {
+        console.log("addIssues request data: ", req)
+        let ret = $.post("/admin/addIssues", {
             code: code,
             begintime: begintime,
             endtime: endtime,
@@ -31,7 +31,7 @@ $(document).ready(function () {
             timeoffset: timeoffset,
             hash: hash,
         }, function(rsp) {
-            console.log("addCode response data: ", rsp)
+            console.log("addIssues response data: ", rsp)
             if (ret.status == 200) {
                 if (!!rsp.error) {
                     alert(rsp.error)
@@ -48,8 +48,54 @@ $(document).ready(function () {
         })
     }
 
-    $('#adcode').click(function () {
-        adcode();
+    var deleIssues = function () {
+        var code = $('#code').val()
+        var begintime = $('#begintime').val()
+        var endtime = $('#endtime').val()
+        var spantime = $('#spantime').val()
+        var timeoffset = $('#timeoffset').val()
+        var hash = window.location.href
+        hash = hash.split('=')[1]
+        var req = {
+            code: code,
+            begintime: begintime,
+            endtime: endtime,
+            spantime: spantime,
+            timeoffset: timeoffset,
+            hash: hash,
+        }
+        console.log("deleIssues request data: ", req)
+        let ret = $.post("/admin/deleIssues", {
+            code: code,
+            begintime: begintime,
+            endtime: endtime,
+            spantime: spantime,
+            timeoffset: timeoffset,
+            hash: hash,
+        }, function(rsp) {
+            console.log("deleIssues response data: ", rsp)
+            if (ret.status == 200) {
+                if (!!rsp.error) {
+                    alert(rsp.error)
+                } else {
+                    $('#code').text('')
+                    $('#begintime').text('')
+                    $('#endtime').text('')
+                    $('#spantime').text('')
+                    $('#timeoffset').text('')
+                }
+            } else {
+               alert(`add code failed, status: ${ret.status}`)
+            }
+        })
+    }
+
+    $('#addIssues').click(function () {
+        addIssues();
+    });
+
+    $('#deleIssues').click(function () {
+        deleIssues();
     });
 });
 </script>
@@ -59,10 +105,11 @@ $(document).ready(function () {
 
 <form method="POST">
     <p>说明：</p>
-    <p>起始时间格式：2018-05-11 12:00:00</p>
-    <p>结束时间格式：2018-05-11 13:00:00</p>
-    <p>每期间隔单位：秒</p>
-    <p>时区时差单位：秒</p>
+    <p>彩票代码列表：北京-bjkl8 | 加拿大-canada | 加拿大西-west_canada | 斯洛伐克-slovakia | 台湾-taiwan | 俄勒冈-oregon</p>
+    <p>起始时间格式：2018-05-11 12:00:00，秒忽略，如2018-05-11 12:00:23，将从2018-05-11 12:00:00开始算起</p>
+    <p>结束时间格式：2018-05-11 13:00:00，结束时间不计算，如2018-05-11 13:00:00不计算期号，2018-05-11 13:00:01，则2018-05-11 13:00:00计算期号</p>
+    <p>每期间隔单位：秒，取10的整数倍，如传的士246，则实际用来计算的值为240</p>
+    <p>时区时差单位：秒，默认为0，目前看到的彩票都是以2018-05-11 13:00这种字符串格式的数据做交互，不涉及时差，留待未来可能的变更</p>
 
     <p/>
     <p>编辑：</p>
@@ -72,7 +119,8 @@ $(document).ready(function () {
     <p>每期间隔<input id="spantime" type="text" value="300"/></p>
     <p>时区时差<input id="timeoffset" type="text" value="0"/></p>
     <p>
-        <button id="adcode" type="button" value="提交">提交</button>
+        <button id="addIssues" type="button" value="新增">新增</button>
+        <button id="deleIssues" type="button" value="删除">删除</button>
     </p>
 </form>
  

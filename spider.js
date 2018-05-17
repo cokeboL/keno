@@ -1,9 +1,11 @@
-const spi_bjkl8 = require('./spider/spi_bjkl8')
-const spi_canada = require('./spider/spi_canada')
-const spi_west_canada = require('./spider/spi_west_canada')
-const spi_slovakia = require('./spider/spi_slovakia')
-const spi_taiwan = require('./spider/spi_taiwan')
-const spi_oregon = require('./spider/spi_oregon')
+const config = require('./config')
+
+const spi_bjkl8 = require('./spiders/spi_bjkl8')
+const spi_canada = require('./spiders/spi_canada')
+const spi_west_canada = require('./spiders/spi_west_canada')
+const spi_slovakia = require('./spiders/spi_slovakia')
+const spi_taiwan = require('./spiders/spi_taiwan')
+const spi_oregon = require('./spiders/spi_oregon')
 
 let spiders = {
 	//北京
@@ -33,5 +35,14 @@ let spiders = {
 }
 
 module.exports.geter = (code) => {
+	if (!!config.test && !!config.test.nonet) {
+		return {
+			get: (info, resolve, reject) => {
+				info.originissueno = '999999'
+				info.result = '10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10'
+				resolve(info)
+			}
+		}
+	}
 	return spiders[code]
 }
