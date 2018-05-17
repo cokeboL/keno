@@ -19,9 +19,4 @@ module.exports = {
 
     enablecalc: true,            //统计功能，true：启用 | false：禁用
     calcSaveInterval: 1000*300,  //统计数据落地到 mysql 时间间隔，此处为300秒，不配置默认60秒
-
-    test: {                      //调试用配置，正式上线去掉此项或全配置为false
-		nodb: false,             //无数据库
-		nonet: false,            //无网络
-	}
 }
