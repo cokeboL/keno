@@ -299,7 +299,7 @@ module.exports.queryCurrIssueInfo = (code, resolve, reject) => {
 		        ret.curr.awardtimestr = util.localTime(row.a_awardtime)
 		        ret.curr.result = row.result
 
-		        ret.next.issueno = row.issueno
+		        ret.next.issueno = row.b_issueno
 		        ret.next.awardtime = row.b_awardtime
 		        ret.next.awardtimestr = util.localTime(row.b_awardtime)
 		        resolve(ret)
