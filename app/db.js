@@ -369,6 +369,7 @@ module.exports.queryIssueInfoByIssueno = (code, issueno, resolve, reject) => {
 
 
 module.exports.queryIssuesInfo = (code, issueno, begintime, endtime, page, num, resolve, reject) => {
+	console.log('db queryIssuesInfo():')
 	let ret = {
 		error: null,
 		code: code,

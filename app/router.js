@@ -149,6 +149,7 @@ const issueInfoByNo =  (req, res) => {
 }
 
 const issueInfo =  (req, res) => {
+	console.log('router issueInfo():')
 	let code = req.query.code
 	if (!code) {
 		response(res, {error:'invalid code'})
