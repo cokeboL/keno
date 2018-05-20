@@ -149,10 +149,8 @@ const issueInfoByNo =  (req, res) => {
 }
 
 const issueInfo =  (req, res) => {
-	console.log('router issueInfo():')
 	let code = req.query.code
 	if (!code) {
-		console.log('router issueInfo(): 111')
 		response(res, {error:'invalid code'})
 		return
 	}
@@ -164,29 +162,24 @@ const issueInfo =  (req, res) => {
 	
 	if (!issueno) {
 		if (!begintime) {
-			console.log('router issueInfo(): 222')
 			response(res, {error:'invalid begintime'})
 			return
 		}
 		if (!endtime) {
-			console.log('router issueInfo(): 333')
 			response(res, {error:'invalid endtime'})
 			return
 		}
 		begintime = new Date(begintime).getTime()
 		if (isNaN(begintime)) {
-			console.log('router issueInfo(): 444')
 			response(res, {error:'invalid begintime'})
 			return
 		}
 		endtime = new Date(endtime).getTime()
 		if (isNaN(endtime)) {
-			console.log('router issueInfo(): 555')
 			response(res, {error:'invalid endtime'})
 			return
 		}
 		if (endtime - begintime > (3600*24*2*1000)) {
-			console.log('router issueInfo(): 666')
 			response(res, {error:'invalid timerange'})
 			return
 		}
@@ -195,9 +188,7 @@ const issueInfo =  (req, res) => {
 	}
 
 	new Promise((resolve, reject) => {
-		console.log('router issueInfo(): 777')
 		db.queryIssuesInfo(code, issueno, begintime, endtime, page, num, resolve, reject)
-		console.log('router issueInfo:', code, issueno, begintime, endtime, page, num, resolve, reject)
 	}).then(ret => {
 		response(res, ret)
 	}).catch(err => {
