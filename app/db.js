@@ -401,7 +401,6 @@ module.exports.queryIssuesInfo = (code, issueno, begintime, endtime, page, num, 
 				connection.release()
 
 		        if(!!err) {
-		        	connection.release()
 					log.error('[queryIssuesByTimerange error] - ', err.message)
 					ret.error = err
 					resolve(ret)

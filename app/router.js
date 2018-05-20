@@ -156,7 +156,7 @@ const issueInfo =  (req, res) => {
 		response(res, {error:'invalid code'})
 		return
 	}
-	let issueno = req.query.issueno
+	let issueno = req.query.issueno || ''
 	let begintime = req.query.begintime
 	let endtime = req.query.endtime
 	let page = req.query.page || 1
