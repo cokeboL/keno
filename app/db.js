@@ -368,7 +368,7 @@ module.exports.queryIssueInfoByIssueno = (code, issueno, resolve, reject) => {
 }
 
 
-module.exports.queryIssuesByTimerange = (code, begintime, endtime, resolve, reject) => {
+module.exports.queryIssuesInfo = (code, issueno, begintime, endtime, page, num, resolve, reject) => {
 	let ret = {
 		error: null,
 		code: code,
@@ -380,8 +380,17 @@ module.exports.queryIssuesByTimerange = (code, begintime, endtime, resolve, reje
 		return
 	}
 
-	let sqlstr = `select issueno,originissueno,awardtime,result from issue where code=? and awardtime>=? and awardtime<=? and flag=1`
-	let params = [code, begintime, endtime]
+	let where = ' where code=? and flag=1 '
+	let params = [code]
+	if (!!issueno) {
+		where = 'and issueno=?'
+		params.push(issueno)
+	} else {
+		where = 'and awardtime>=? and awardtime<=?'
+		params.push(begintime)
+		params.push(endtime)
+	}
+	let sqlstr = `select issueno,originissueno,awardtime,result from issue ` + where
 	
 	mysqlPool.getConnection((err, connection) => {
 		if (!err) {

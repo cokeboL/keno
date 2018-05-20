@@ -148,36 +148,46 @@ const issueInfoByNo =  (req, res) => {
 	})
 }
 
-const issueInfoByTimerange =  (req, res) => {
+const issueInfo =  (req, res) => {
 	let code = req.query.code
 	if (!code) {
 		response(res, {error:'invalid code'})
 		return
 	}
+	let issueno = req.query.issueno
 	let begintime = req.query.begintime
-	if (!begintime) {
-		response(res, {error:'invalid begintime'})
-		return
-	}
 	let endtime = req.query.endtime
-	if (!endtime) {
-		response(res, {error:'invalid endtime'})
-		return
-	}
-
-	begintime = new Date(begintime).getTime()
-	if (isNaN(begintime)) {
-		response(res, {error:'invalid begintime'})
-		return
-	}
-	endtime = new Date(endtime).getTime()
-	if (isNaN(endtime)) {
-		response(res, {error:'invalid endtime'})
-		return
+	// let page = req.query.page || 1
+	// let num = req.query.num || 50
+	
+	if (!issueno) {
+		if (!begintime) {
+			response(res, {error:'invalid begintime'})
+			return
+		}
+		if (!endtime) {
+			response(res, {error:'invalid endtime'})
+			return
+		}
+	} else {
+		begintime = new Date(begintime).getTime()
+		if (isNaN(begintime)) {
+			response(res, {error:'invalid begintime'})
+			return
+		}
+		endtime = new Date(endtime).getTime()
+		if (isNaN(endtime)) {
+			response(res, {error:'invalid endtime'})
+			return
+		}
+		if (endtime - begintime > (3600*24*2*1000)) {
+			response(res, {error:'invalid timerange'})
+			return
+		}
 	}
 
 	new Promise((resolve, reject) => {
-		db.queryIssuesByTimerange(code, begintime, endtime, resolve, reject)
+		db.queryIssuesInfo(code, issueno, begintime, endtime, page, num, resolve, reject)
 	}).then(ret => {
 		response(res, ret)
 	}).catch(err => {
@@ -230,8 +240,8 @@ module.exports.initRouters =  (app) => {
 
 	//app query
 	app.get('/query/currIssueInfo', currIssueInfo)
-	app.get('/query/issueInfoByNo', issueInfoByNo)
-	app.get('/query/issueInfoByTimerange', issueInfoByTimerange)
+	// app.get('/query/issueInfoByNo', issueInfoByNo)
+	app.get('/query/issueInfo', issueInfo)
 
 	//calc query
 	app.get('/query/calcInfoByDate', calcInfoByDate)
