@@ -159,8 +159,8 @@ const issueInfo =  (req, res) => {
 	let issueno = req.query.issueno
 	let begintime = req.query.begintime
 	let endtime = req.query.endtime
-	// let page = req.query.page || 1
-	// let num = req.query.num || 50
+	let page = req.query.page || 1
+	let num = req.query.num || 100
 	
 	if (!issueno) {
 		if (!begintime) {
