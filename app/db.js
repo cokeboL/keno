@@ -104,7 +104,7 @@ module.exports.getCalcData = (resolve, reject) => {
 		return
 	}
 
-	let sqlstr = 'select a.calcdate calcdate, a.data data from calculate a, (select min(calcdate) calcdate from calculate) b where a.calcdate=b.calcdate'
+	let sqlstr = 'select a.calcdate calcdate, a.data data from calculate a, (select max(calcdate) calcdate from calculate) b where a.calcdate=b.calcdate'
 
 	mysqlPool.getConnection((err, connection) => {
 		if (!err) {
