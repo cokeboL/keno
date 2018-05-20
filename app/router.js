@@ -173,7 +173,6 @@ const issueInfo =  (req, res) => {
 			response(res, {error:'invalid endtime'})
 			return
 		}
-	} else {
 		begintime = new Date(begintime).getTime()
 		if (isNaN(begintime)) {
 			console.log('router issueInfo(): 444')
@@ -191,6 +190,8 @@ const issueInfo =  (req, res) => {
 			response(res, {error:'invalid timerange'})
 			return
 		}
+	} else {
+		
 	}
 
 	new Promise((resolve, reject) => {
