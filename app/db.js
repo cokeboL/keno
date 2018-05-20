@@ -391,7 +391,8 @@ module.exports.queryIssuesInfo = (code, issueno, begintime, endtime, page, num, 
 		params.push(endtime)
 	}
 	let sqlstr = `select issueno,originissueno,awardtime,result from issue ` + where
-	
+	console.log('db sqlstr:', sqlstr)
+	console.log('db params:', params)
 	mysqlPool.getConnection((err, connection) => {
 		if (!err) {
 			connection.query(sqlstr, params, (err, result, fields) => {
@@ -418,6 +419,13 @@ module.exports.queryIssuesInfo = (code, issueno, begintime, endtime, page, num, 
 						awardtimestr: util.localTime(row.awardtime),
 						result: row.result,
 		        	})
+		        	console.log(`db result ${i}:`, JSON.stringify({
+		        		issueno: row.issueno,
+						originissueno: row.originissueno,
+						awardtime: row.awardtime,
+						awardtimestr: util.localTime(row.awardtime),
+						result: row.result,
+		        	}))
 		        }
 			    resolve(ret)
 			})

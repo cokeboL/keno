@@ -188,6 +188,7 @@ const issueInfo =  (req, res) => {
 
 	new Promise((resolve, reject) => {
 		db.queryIssuesInfo(code, issueno, begintime, endtime, page, num, resolve, reject)
+		console.log('router issueInfo:', code, issueno, begintime, endtime, page, num, resolve, reject)
 	}).then(ret => {
 		response(res, ret)
 	}).catch(err => {
