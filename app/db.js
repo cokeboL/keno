@@ -369,7 +369,7 @@ module.exports.queryIssueInfoByIssueno = (code, issueno, resolve, reject) => {
 
 
 module.exports.queryIssuesInfo = (code, issueno, begintime, endtime, page, num, resolve, reject) => {
-	console.log('db queryIssuesInfo():')
+	console.log('db queryIssuesInfo(): 111')
 	let ret = {
 		error: null,
 		code: code,
@@ -377,6 +377,7 @@ module.exports.queryIssuesInfo = (code, issueno, begintime, endtime, page, num, 
 	}
 
 	if (!!config.test && !!config.test.nodb) {
+		console.log('db queryIssuesInfo(): 222')
 		resolve(ret)
 		return
 	}
