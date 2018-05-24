@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang='zh'>
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>【快乐彩KENO玩法规则】快乐彩大小_单双_上下_奇偶_五行_串关玩法规则</title>
+    <meta name="keywords" content="快乐彩玩法规则,KENO玩法规则">
+    <meta name="description" content="皇家快乐彩KENO提供大小_单双_上下_奇偶_五行_串关_珠仔(选号)等玩法">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+</head>
+<style id="stylish-1" class="stylish" type="text/css">
+    /* i really want this to be global */
+    
+    .right_side {
+        display: none;
+    }
+    
+    .left_side {
+        display: none;
+    }
+    
+    .td_item {
+        display: none;
+    }
+    
+    .boniu_cy {
+        display: none;
+    }
+    
+    .boniu_sh {
+        display: none;
+    }
+    
+    .cal-time {
+        display: none;
+    }
+    
+    .scrollTop {
+        display: none;
+    }
+    
+    .sign {
+        display: none;
+    }
+</style>
+
+<body class="playRules">
+
+
+    <div class="pr_banner" id='pr_banner'>
+        <div class="pr_banner_d">
+            <a class="pr_logo" href="../index.html"></a>
+        </div>
+    </div>
+
+    <div class="pr_menu">
+        <a href="#pr_block1" index="1" class="hover">快乐彩玩法种类</a>
+        <a href="#pr_block2" index="2" class="">总和大小&amp;总和单双</a>
+        <a href="#pr_block3" index="3" class="">总和奇偶玩法</a>
+        <a href="#pr_block4" index="4" class="">上下盘玩法</a>
+        <a href="#pr_block5" index="5" class="">总和五行玩法</a>
+        <a href="#pr_block6" index="6" class="">珠仔（选号）玩法</a>
+        <a href="#pr_block7" index="7" class="">大小单双串关玩法</a>
+        <a href="#pr_banner" index="8" class=""><i></i>返回顶部</a>
+    </div>
+
+    <div class="content">
+        <div class="content_d">
+            <div id="pr_block1"><img src="../images/pic/pr_block1.gif" alt="快乐彩玩法种类"></div>
+            <div id="pr_block2"><img src="../images/pic/pr_block2.gif" alt="快乐彩总和大小单双玩法"></div>
+            <div id="pr_block3"><img src="../images/pic/pr_block3.gif" alt="快乐彩总和奇偶玩法"></div>
+            <div id="pr_block4"><img src="../images/pic/pr_block4.gif" alt="快乐彩上下盘玩法"></div>
+            <div id="pr_block5"><img src="../images/pic/pr_block5.gif" alt="快乐彩总和五行玩法"></div>
+            <div id="pr_block6"><img src="../images/pic/pr_block6.gif" alt="快乐彩珠仔选号玩法"></div>
+            <div id="pr_block7"><img src="../images/pic/pr_block7.gif" alt="快乐彩大小单双串关玩法"></div>
+
+        </div>
+    </div>
+    <script src="../js/jquery-2.2.3.min.js "></script>
+    <script type="text/javascript">
+        $(function() {
+            var type = window.location.hash;
+            if (type == undefined || type == null) {
+                var codeIndex = window.location.href.indexOf('#');
+                if (codeIndex >= 0) {
+                    type = window.location.href.substr(codeIndex, window.location.href.length - codeIndex);
+                }
+            }
+            if (type != null && type != undefined) {
+                var postion = $(type).offset().top;
+                $('html, body').animate({
+                    scrollTop: postion
+                }, 'slow');
+
+                if ($('.pr_menu a').eq($(type).attr("index")).hasClass("hover")) {
+                    window.location = window.location;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
