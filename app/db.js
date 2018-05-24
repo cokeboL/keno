@@ -408,7 +408,7 @@ module.exports.queryIssuesInfo = (code, issueno, begintime, endtime, page, num, 
 		        	return
 		        }
 		        for (let i=0; i<result.length; i++) {
-		        	let row = result[0]
+		        	let row = result[i]
 		        	ret.issues.push({
 		        		issueno: row.issueno,
 						originissueno: row.originissueno,
