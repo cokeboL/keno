@@ -390,7 +390,7 @@ module.exports.queryIssuesInfo = (code, issueno, begintime, endtime, page, num, 
 		params.push(begintime)
 		params.push(endtime)
 	}
-	let sqlstr = `select issueno,originissueno,awardtime,result from issue ` + where
+	let sqlstr = `select issueno,originissueno,awardtime,result from issue ` + where + ' order by issueno desc'
 	mysqlPool.getConnection((err, connection) => {
 		if (!err) {
 			connection.query(sqlstr, params, (err, result, fields) => {
