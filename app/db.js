@@ -416,13 +416,6 @@ module.exports.queryIssuesInfo = (code, issueno, begintime, endtime, page, num, 
 						awardtimestr: util.localTime(row.awardtime),
 						result: row.result,
 		        	})
-		        	console.log(i, JSON.stringify({
-		        		issueno: row.issueno,
-						originissueno: row.originissueno,
-						awardtime: row.awardtime,
-						awardtimestr: util.localTime(row.awardtime),
-						result: row.result,
-		        	}))
 		        }
 			    resolve(ret)
 			})
