@@ -12,6 +12,8 @@ $(document).ready(function () {
         var endtime = $('#endtime').val()
         var spantime = $('#spantime').val()
         var timeoffset = $('#timeoffset').val()
+        var firstissueno = $('#firstissueno').val()
+        var spanissueno = $('#spanissueno').val()
         var hash = window.location.href
         hash = hash.split('=')[1]
         var req = {
@@ -20,6 +22,8 @@ $(document).ready(function () {
             endtime: endtime,
             spantime: spantime,
             timeoffset: timeoffset,
+            firstissueno: firstissueno,
+            spanissueno: spanissueno,
             hash: hash,
         }
         console.log("addIssues request data: ", req)
@@ -34,16 +38,17 @@ $(document).ready(function () {
             console.log("addIssues response data: ", rsp)
             if (ret.status == 200) {
                 if (!!rsp.error) {
-                    alert(rsp.error)
+                    alert(`添加失败：${rsp.error}`)
                 } else {
                     $('#code').text('')
                     $('#begintime').text('')
                     $('#endtime').text('')
                     $('#spantime').text('')
                     $('#timeoffset').text('')
+                    alert(`添加成功`)
                 }
             } else {
-               alert(`add code failed, status: ${ret.status}`)
+               alert(`添加失败：, 错误码: ${ret.status}`)
             }
         })
     }
@@ -54,6 +59,8 @@ $(document).ready(function () {
         var endtime = $('#endtime').val()
         var spantime = $('#spantime').val()
         var timeoffset = $('#timeoffset').val()
+        var firstissueno = $('#firstissueno').val()
+        var spanissueno = $('#spanissueno').val()
         var hash = window.location.href
         hash = hash.split('=')[1]
         var req = {
@@ -62,6 +69,8 @@ $(document).ready(function () {
             endtime: endtime,
             spantime: spantime,
             timeoffset: timeoffset,
+            firstissueno: firstissueno,
+            spanissueno: spanissueno,
             hash: hash,
         }
         console.log("deleIssues request data: ", req)
@@ -76,7 +85,7 @@ $(document).ready(function () {
             console.log("deleIssues response data: ", rsp)
             if (ret.status == 200) {
                 if (!!rsp.error) {
-                    alert(rsp.error)
+                    alert(`删除失败：${rsp.error}`)
                 } else {
                     $('#code').text('')
                     $('#begintime').text('')
@@ -84,8 +93,9 @@ $(document).ready(function () {
                     $('#spantime').text('')
                     $('#timeoffset').text('')
                 }
+                alert(`删除成功`)
             } else {
-               alert(`add code failed, status: ${ret.status}`)
+               alert(`删除失败，错误码: ${ret.status}`)
             }
         })
     }
@@ -118,6 +128,8 @@ $(document).ready(function () {
     <p>结束时间<input id="endtime" type="text" value="2018-05-11 13:00:00"/></p>
     <p>每期间隔<input id="spantime" type="text" value="300"/></p>
     <p>时区时差<input id="timeoffset" type="text" value="0"/></p>
+    <p>起始期号<input id="firstissueno" type="text" value="0"/></p>
+    <p>期号间隔<input id="spanissueno" type="text" value="1"/></p>
     <p>
         <button id="addIssues" type="button" value="新增">新增</button>
         <button id="deleIssues" type="button" value="删除">删除</button>

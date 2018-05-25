@@ -199,13 +199,13 @@ module.exports.insertIssueInfo = (info) => {
 		if (!err) {
 			connection.query(sqlstr, params, (err, result) => {
 				connection.release()
+				getIssueInfo(info)
 		        if(!!err) {
 					log.error('[insert issue error] - ', err.message)
 					return
 		        }
 				log.info(`insert success: {id: ${result.insertId}, code: ${info.code}, issueno: ${info.issueno}, awardtime: ${info.awardtime}, result: ${info.result}, flag: ${info.flag}`)        
 				info.id = result.insertId
-				getIssueInfo(info)
 			})
 		} else {
 			log.error('mysqlPool.getConnection() error: ', err)
