@@ -1,4 +1,4 @@
-var TotalMidd = 810;
+const TotalMidd = 810;
 
 
 //倒计时

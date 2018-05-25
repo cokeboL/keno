@@ -204,15 +204,16 @@ $(document).ready(function() {
                 } else {
                     var next = data.next.awardtime;
                     var diff = parseInt((next - Date.now()) / 1000);
-                    downtimer = downtimerFunc(diff);
-
-                    reloadTimer = window.setInterval(function() {
-                        diff--;
-                        if (diff <= 0) {
-                            searchCurrNext()
-                            searchHistory()
-                        }
-                    }, 1000)
+                    if(diff>0){
+                        downtimer = downtimerFunc(diff);
+                        reloadTimer = window.setInterval(function() {
+                            diff--;
+                            if (diff <= 0) {
+                                searchCurrNext()
+                                searchHistory()
+                            }
+                        }, 1000)
+                    }
 
                     var currIssueNo = data.curr.issueno;
                     $('#first_period').html('').html(currIssueNo + '期');
