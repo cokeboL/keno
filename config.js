@@ -10,7 +10,7 @@ module.exports = {
         connectionLimit: 100,    //数据库连接池大小，建议不小于100
     },
 
-    spiderMaxTryTimes: 3600,     //爬虫爬取单个期号最多尝试次数
+    spiderMaxTryTimes: 100,     //爬虫爬取单个期号最多尝试次数
 
     admin: {             
         username: "admin",       //管理后台账号
