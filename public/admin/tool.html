@@ -27,14 +27,7 @@ $(document).ready(function () {
             hash: hash,
         }
         console.log("addIssues request data: ", req)
-        let ret = $.post("/admin/addIssues", {
-            code: code,
-            begintime: begintime,
-            endtime: endtime,
-            spantime: spantime,
-            timeoffset: timeoffset,
-            hash: hash,
-        }, function(rsp) {
+        let ret = $.post("/admin/addIssues", req, function(rsp) {
             console.log("addIssues response data: ", rsp)
             if (ret.status == 200) {
                 if (!!rsp.error) {
@@ -74,14 +67,7 @@ $(document).ready(function () {
             hash: hash,
         }
         console.log("deleIssues request data: ", req)
-        let ret = $.post("/admin/deleIssues", {
-            code: code,
-            begintime: begintime,
-            endtime: endtime,
-            spantime: spantime,
-            timeoffset: timeoffset,
-            hash: hash,
-        }, function(rsp) {
+        let ret = $.post("/admin/deleIssues", req, function(rsp) {
             console.log("deleIssues response data: ", rsp)
             if (ret.status == 200) {
                 if (!!rsp.error) {
