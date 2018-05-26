@@ -158,11 +158,11 @@ const issueInfo =  (req, res) => {
 		response(res, {error:'invalid code'})
 		return
 	}
-	let issueno = req.query.issueno || ''
+	let issueno = parseInt(req.query.issueno) || ''
 	let begintime = req.query.begintime
 	let endtime = req.query.endtime
-	let page = req.query.page || 1
-	let num = req.query.num || 100
+	let page = parseInt(req.query.page) || 1
+	let num = parseInt(req.query.num) || 100
 	
 	if (!issueno) {
 		if (!begintime) {
