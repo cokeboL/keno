@@ -383,7 +383,8 @@ module.exports.queryIssuesInfo = (code, issueno, begintime, endtime, page, num, 
 	let where = ' where code=? and flag=1 '
 	let params = [code]
 	if (!!issueno) {
-		where += 'and issueno=?'
+		where += 'and issueno=? or originissueno=?'
+		params.push(issueno)
 		params.push(issueno)
 	} else {
 		where += 'and awardtime>=? and awardtime<=?'

@@ -1,7 +1,7 @@
 const db = require('./db')
 const log = require('log4js').getLogger()
 
-module.exports.generateIssueNo = (code, begintime, endtime, spantime, action, timeoffset=0) => {
+module.exports.generateIssueNo = (code, begintime, endtime, spantime, firstissueno, spanissueno, action, timeoffset=0) => {
 	log.info('generateIssueNo: ', code, begintime, endtime, spantime, action, timeoffset)
 	if (!code) {
 		return 'no code'
@@ -23,7 +23,7 @@ module.exports.generateIssueNo = (code, begintime, endtime, spantime, action, ti
 	let year = begindate.getFullYear()
 	let month = begindate.getMonth() + 1
 	let day = begindate.getDate()
-	let firstIssueno = year*100000000 + month*1000000 + day*10000 + 1
+	let firstIssueno = firstissueno || year*100000000 + month*1000000 + day*10000 + 1
 	let currtime = begintime
 	let issueno = firstIssueno
 	let infos = []
@@ -35,7 +35,7 @@ module.exports.generateIssueNo = (code, begintime, endtime, spantime, action, ti
 			result: "",    			 /* 开奖结果 */
 			flag: 0,     			 /* 是否已抓取 */
 		})
-		issueno++
+		issueno += spanissueno
 		currtime += spantime*1000
 	}
 	for (let i=0; i<infos.length; i++) {

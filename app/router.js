@@ -45,6 +45,8 @@ const addIssues =  (req, res) => {
 	let endtime = req.body.endtime
 	let spantime = parseInt(req.body.spantime)
 	let timeoffset = parseInt(req.body.timeoffset) || 0
+	let firstissueno = parseInt(req.body.firstissueno) || 0
+	let spanissueno = parseInt(req.body.spanissueno) || 1
 
 	if (!code) {
 		response(res, {error:'invalid code'})
@@ -71,7 +73,7 @@ const addIssues =  (req, res) => {
 	}
 	
 	log.info('addIssues: ', JSON.stringify(req.body))
-	let error = tool.generateIssueNo(code, begintime, endtime, spantime, 'add', timeoffset)
+	let error = tool.generateIssueNo(code, begintime, endtime, spantime, firstissueno, spanissueno, 'add', timeoffset)
 	response(res, {error})
 }
 
@@ -81,6 +83,8 @@ const deleIssues =  (req, res) => {
 	let endtime = req.body.endtime
 	let spantime = parseInt(req.body.spantime)
 	let timeoffset = parseInt(req.body.timeoffset) || 0
+	let firstissueno = parseInt(req.body.firstissueno) || 0
+	let spanissueno = parseInt(req.body.spanissueno) || 1
 
 	if (!code) {
 		response(res, {error:'invalid code'})
@@ -107,7 +111,7 @@ const deleIssues =  (req, res) => {
 	}
 	
 	log.info('deleIssues: ', JSON.stringify(req.body))
-	let error = tool.generateIssueNo(code, begintime, endtime, spantime, 'delete', timeoffset)
+	let error = tool.generateIssueNo(code, begintime, endtime, spantime, firstissueno, spanissueno, 'delete', timeoffset)
 	response(res, {error})
 }
 
