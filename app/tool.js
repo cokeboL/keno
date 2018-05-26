@@ -2,7 +2,7 @@ const db = require('./db')
 const log = require('log4js').getLogger()
 
 module.exports.generateIssueNo = (code, begintime, endtime, spantime, firstissueno, spanissueno, action, timeoffset=0) => {
-	log.info('generateIssueNo: ', code, begintime, endtime, spantime, action, timeoffset)
+	log.info('generateIssueNo: ', code, begintime, endtime, spantime, firstissueno, spanissueno, action, timeoffset)
 	if (!code) {
 		return 'no code'
 	}
