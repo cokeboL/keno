@@ -47,7 +47,7 @@ const addIssues =  (req, res) => {
 	let timeoffset = parseInt(req.body.timeoffset) || 0
 	let firstissueno = parseInt(req.body.firstissueno) || 0
 	let spanissueno = parseInt(req.body.spanissueno) || 1
-console.log('--- addIssues: ', req.body.firstissueno, firstissueno, req.body.spanissueno, spanissueno)
+
 	if (!code) {
 		response(res, {error:'invalid code'})
 		return
@@ -85,7 +85,7 @@ const deleIssues =  (req, res) => {
 	let timeoffset = parseInt(req.body.timeoffset) || 0
 	let firstissueno = parseInt(req.body.firstissueno) || 0
 	let spanissueno = parseInt(req.body.spanissueno) || 1
-console.log('--- addIssues: ', req.body.firstissueno, firstissueno, req.body.spanissueno, spanissueno)
+
 	if (!code) {
 		response(res, {error:'invalid code'})
 		return
