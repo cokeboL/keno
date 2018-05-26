@@ -4,7 +4,14 @@ const https = require('https')
 const { URL } = require('url');
 // var FormData = require('form-data');
  
-
+const timeformat = (date) => {
+	let year = date.getFullYear()
+	let month = date.getMonth() + 1
+	let day = date.getDate()
+	let hour = date.getHours()
+	let minute = date.getMinutes()
+	return `${year}-${month}-${day} ${hour}:${minute}`
+}
 module.exports.get = (info, resolve, reject) => {
 	let year = info.awardtime.getFullYear()
 	let month = info.awardtime.getMonth() + 1
@@ -31,7 +38,7 @@ module.exports.get = (info, resolve, reject) => {
 				let found = false
 				for (let i=0; i<data.Data.rows.length; i++) {
 					let row = data.Data.rows[i]
-					if ((new Date(row.AwardDate).getTime()) == (info.awardtime.getTime())) {
+					if (timeformat(new Date(row.AwardDate)) == timeformat(info.awardtime)) {
 						info.originissueno = row.IssueNo
 						//info.result = row.Result
 						info.result = row.Result.split('|')[0]
