@@ -50,7 +50,7 @@ const getIssueInfo = (info) => {
 					get()
 				})
 			}
-		}, 1000)
+		}, parseInt(Math.random())*1000+1000)
 	}
 	let now = new Date().getTime()
 	if (now < info.awardtime) {
