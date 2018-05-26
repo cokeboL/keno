@@ -110,11 +110,11 @@
                 <div class="ic_l_right">
                     <p class="ic_l_r_title"><span>地区介绍</span></p>
                     <div class="ic_l_r_img">
-                        <a href="./page/zone.html" rel="nofollow"><img src="./images/pic/indexImg_area.gif" alt="地区介绍"></a>
+                        <a href="./page/zone.html" target="_blank"><img src="./images/pic/indexImg_area.gif" alt="地区介绍"></a>
                     </div>
                     <p class="ic_l_r_title"><span>玩法规则</span></p>
                     <div class="ic_l_r_img">
-                        <a href="./page/rule.html" target="_blank" rel="nofollow"><img src="./images/pic/indexImg_rule.gif" alt="玩法规则"></a>
+                        <a href="./page/rule.html" target="_blank"><img src="./images/pic/indexImg_rule.gif" alt="玩法规则"></a>
                     </div>
                 </div>
             </div>
@@ -242,7 +242,7 @@
                 var code = idArr[i];
                 $.ajax({
                     type: "GET",
-                    //url: './data/currIssueInfo.json',
+                    // url: './data/currIssueInfo.json',
                     url: '/query/currIssueInfo',
                     data: {
                         code: code

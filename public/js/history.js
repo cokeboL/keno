@@ -193,7 +193,7 @@ $(document).ready(function() {
         if (!!reloadTimer) clearInterval(reloadTimer);
         $.ajax({
             type: 'GET',
-            //url: '../data/currIssueInfo.json',
+            // url: '../data/currIssueInfo.json',
             url: '/query/currIssueInfo',
             data: { code: code },
             dataType: 'json',
@@ -204,7 +204,7 @@ $(document).ready(function() {
                 } else {
                     var next = data.next.awardtime;
                     var diff = parseInt((next - Date.now()) / 1000);
-                    if(diff>0){
+                    if (diff > 0) {
                         downtimer = downtimerFunc(diff);
                         reloadTimer = window.setInterval(function() {
                             diff--;
@@ -272,23 +272,34 @@ $(document).ready(function() {
         if (flag) {
             $.ajax({
                 type: 'GET',
-                //url: '../data/issueInfo.json',
+                // url: '../data/issueInfo.json',
                 url: '/query/issueInfo',
                 data: param,
                 dataType: 'json',
                 success: function(data) {
                     $('#loading').parent().hide();
                     if (data.error !== null) {
-                        $('#loading').parent().hide();
                         popupMsg(data.error)
+                        $('#noData').show();
+                        $('#data').hide();
+
+                        $('#award_mode,#award_result').hide();
+                        $('#award_wait').show();
+
                     } else {
                         var issues = data.issues;
                         var code = data.code;
                         if (issues.length == 0) {
                             $('#noData').show();
                             $('#data').hide();
+
+                            $('#award_mode,#award_result').hide();
+                            $('#award_wait').show();
                         } else {
                             $('#noData').hide();
+                            $('#award_mode,#award_result').show();
+                            $('#award_wait').hide();
+
                             var html = '';
                             issues.forEach(function(v) {
                                 html += drawTableRow(v)
