@@ -21,7 +21,7 @@ const getIssueInfo = (info) => {
 	_doing[key] = true
 	let trytimes = 0
 	info = Object.assign({}, info)
-	const get = () => {
+	const get = (to) => {
 		setTimeout(() => {
 			if (!_doing[key]) {
 				return
@@ -50,7 +50,7 @@ const getIssueInfo = (info) => {
 					get()
 				})
 			}
-		}, parseInt(Math.random()*500)+5000)
+		}, to || parseInt(Math.random()*500)+5000)
 	}
 	let now = new Date().getTime()
 	if (now < info.awardtime) {
@@ -58,7 +58,7 @@ const getIssueInfo = (info) => {
 			get()
 		}, (info.awardtime-now))
 	} else {
-		get()
+		get(1000)
 	}
 }
 
