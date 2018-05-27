@@ -264,17 +264,19 @@ module.exports.queryCurrIssueInfo = (code, resolve, reject) => {
 		return
 	}
 
-	// let sqlstr1 = `select issueno,originissueno,awardtime,result from issue where code=? and flag=1 order by awardtime desc limit 1` //当期
-	// let sqlstr2 = `select issueno,awardtime from issue where code=? and flag=0 order by awardtime asc limit 1` //下一期
 	let sqlstr = `select a.*, b.* from 
-				(select issueno a_issueno,originissueno,awardtime a_awardtime,result 
-				 from issue
-				 where code=? and flag=1 order by awardtime desc limit 1
-				) a,
-				(select issueno b_issueno,awardtime b_awardtime 
-				 from issue
-				 where code=? and flag=0 order by awardtime asc limit 1
-				) b`
+				 (select issueno a_issueno,originissueno,awardtime a_awardtime,result 
+				  from issue
+				  where code=? and flag=1 order by awardtime desc limit 1
+				 ) a,
+				 (select m.issueno b_issueno,m.awardtime b_awardtime 
+				  from issue m,
+				  (select awardtime,result 
+				  from issue
+			 	 where code=? and flag=1 order by awardtime desc limit 1
+			 	 ) n
+				  where m.code=? and m.flag=0 and m.awardtime > n.awardtime order by m.awardtime asc limit 1
+				 ) b`
 	let params = [code, code]
 
 	mysqlPool.getConnection((err, connection) => {
