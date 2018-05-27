@@ -11,6 +11,7 @@ var code = QueryObj['code'] || 'bjkl8';
 // var diff = '';
 var downtimer = '';
 var reloadTimer = '';
+var pendingTimer = '';
 var latestTen = '';
 $(document).ready(function() {
 
@@ -103,7 +104,7 @@ $(document).ready(function() {
             clearInterval(downtimer)
         }
         searchCurrNext()
-        searchHistory()
+        searchHistory(true)
     })
 
     function popupMsg(msg) {
@@ -205,16 +206,28 @@ $(document).ready(function() {
                     var next = data.next.awardtime;
                     var diff = parseInt((next - Date.now()) / 1000);
                     if (diff > 0) {
+                        if (!!pendingTimer) clearInterval(pendingTimer)
+
+                        $('#award_close').hide();
+                        $('#award_info').css('display', 'inline-block');
+
                         downtimer = downtimerFunc(diff);
                         reloadTimer = window.setInterval(function() {
                             diff--;
-                            if (diff <= 0) {
+                            if (diff < 0) {
                                 searchCurrNext()
-                                searchHistory()
+                                searchHistory(true)
                             }
                         }, 1000)
                     } else {
-                        $('#minute,#seconds').html('')
+                        if (!!downtimer) clearInterval(downtimer)
+                        if (!!reloadTimer) clearInterval(reloadTimer)
+                        pendingTimer = window.setInterval(function() {
+                            searchCurrNext()
+                            searchHistory(true)
+                        }, 1000 * 60)
+                        $('#award_close').css('display', 'inline-block');
+                        $('#award_info').hide();
                     }
 
                     var currIssueNo = data.curr.issueno;
@@ -229,11 +242,15 @@ $(document).ready(function() {
     }
     searchCurrNext()
 
-    function searchHistory() {
+    function searchHistory(isInitSearch) {
         var flag = true;
         var param = {
             code: code,
         };
+        if (isInitSearch) {
+            $('#search_issue_no,#begintime,#endtime').val('');
+        }
+
         var issueno = $('#search_issue_no').val().trim();
         var begintime = $('#begintime').val().trim();
         var endtime = $('#endtime').val().trim();
