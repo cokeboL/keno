@@ -213,6 +213,8 @@ $(document).ready(function() {
                                 searchHistory()
                             }
                         }, 1000)
+                    } else {
+                        $('#minute,#seconds').html('')
                     }
 
                     var currIssueNo = data.curr.issueno;
