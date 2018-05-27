@@ -277,7 +277,7 @@ module.exports.queryCurrIssueInfo = (code, resolve, reject) => {
 			 	 ) n
 				  where m.code=? and m.flag=0 and m.awardtime > n.awardtime order by m.awardtime asc limit 1
 				 ) b`
-	let params = [code, code]
+	let params = [code, code, code]
 
 	mysqlPool.getConnection((err, connection) => {
 		if (!err) {
